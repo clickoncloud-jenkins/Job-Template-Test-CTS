@@ -1,16 +1,16 @@
-  version: 1
-  type: pipeline-template
+pipeline:
+  agent:
+    any:
+  stages:
+    - stage: "Log Jenkins Maven Docker Java and Git versions"
+      steps:
+        - sh "java -version"
+        - sh "git --version"
+        - sh "docker --version"
+    - stage: "Jenkins YAML Maven Build"
+      steps:
+        - git "https://github.com/learn-devops-fast/rock-paper-scissors.git"
 
-  name: Java Maven App Pipeline Job
-  description: Simple Java App With Maven
-  parameters:
-    - name: emailRecipient
-      type: string
-      displayName: Email address to be used for sending build notifications
-    - name: github_repo
-      type: string
-      displayName: GitHub HTTPS repo endpoint
-    - name: github_creds
-      displayName: GitHub Credentials ID
-      type: credentials
-      defaultValue: github-creds-example
+    - stage: "Final Jenkins YAML Pipeline Stage"
+      steps:
+        - sh "echo 'Jenkins YAML Pipeline Complete'"
